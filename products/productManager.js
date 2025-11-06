@@ -25,14 +25,14 @@ export default class ProductManager {
 
   async getProductById(id) {
     const products = await this.#loadFile();
-    // comparar como string para mayor robustez
+    
     return products.find((p) => String(p.id) === String(id)) || null;
   }
 
   async addProduct(product) {
     const products = await this.#loadFile();
 
-    // Validación básica
+    
     const required = ["title", "description", "code", "price", "status", "stock", "category", "thumbnails"];
     for (const field of required) {
       if (product[field] === undefined) {

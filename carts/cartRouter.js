@@ -3,10 +3,10 @@ import CartManager from "./cartManager.js";
 
 const router = Router();
 
-// Ruta correcta hacia carts.json
+
 const manager = new CartManager("../data/carts.json");
 
-// POST /carts
+
 router.post("/", async (req, res) => {
   try {
     const cart = await manager.createCart();
@@ -16,7 +16,7 @@ router.post("/", async (req, res) => {
   }
 });
 
-// GET /carts/:cid
+
 router.get("/:cid", async (req, res) => {
   try {
     const cart = await manager.getCartById(req.params.cid);
@@ -27,7 +27,7 @@ router.get("/:cid", async (req, res) => {
   }
 });
 
-// POST /carts/:cid/product/:pid
+
 router.post("/:cid/product/:pid", async (req, res) => {
   try {
     const updated = await manager.addProductToCart(req.params.cid, req.params.pid);

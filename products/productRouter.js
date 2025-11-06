@@ -3,10 +3,10 @@ import ProductManager from "./productManager.js";
 
 const router = Router();
 
-// Ruta correcta: subir un nivel y entrar en /data
+
 const manager = new ProductManager("../data/products.json");
 
-// GET /products
+
 router.get("/", async (req, res) => {
   try {
     const products = await manager.getProducts();
@@ -16,7 +16,7 @@ router.get("/", async (req, res) => {
   }
 });
 
-// GET /products/:pid
+
 router.get("/:pid", async (req, res) => {
   try {
     const product = await manager.getProductById(req.params.pid);
@@ -27,7 +27,7 @@ router.get("/:pid", async (req, res) => {
   }
 });
 
-// POST /products
+
 router.post("/", async (req, res) => {
   try {
     const newProduct = await manager.addProduct(req.body);
@@ -37,7 +37,7 @@ router.post("/", async (req, res) => {
   }
 });
 
-// PUT /products/:pid
+
 router.put("/:pid", async (req, res) => {
   try {
     const updated = await manager.updateProduct(req.params.pid, req.body);
@@ -48,7 +48,7 @@ router.put("/:pid", async (req, res) => {
   }
 });
 
-// DELETE /products/:pid
+
 router.delete("/:pid", async (req, res) => {
   try {
     const ok = await manager.deleteProduct(req.params.pid);
