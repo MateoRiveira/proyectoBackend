@@ -1,3 +1,4 @@
+
 import fs from "fs";
 import crypto from "crypto";
 
@@ -25,14 +26,12 @@ export default class ProductManager {
 
   async getProductById(id) {
     const products = await this.#loadFile();
-    
     return products.find((p) => String(p.id) === String(id)) || null;
   }
 
   async addProduct(product) {
     const products = await this.#loadFile();
 
-    
     const required = ["title", "description", "code", "price", "status", "stock", "category", "thumbnails"];
     for (const field of required) {
       if (product[field] === undefined) {
@@ -40,7 +39,6 @@ export default class ProductManager {
       }
     }
 
-    // Evitar duplicado por code
     if (products.some((p) => p.code === product.code)) {
       throw new Error("Ya existe un producto con ese code");
     }
@@ -67,11 +65,9 @@ export default class ProductManager {
     const idx = products.findIndex((p) => String(p.id) === String(id));
     if (idx === -1) return null;
 
-    // Nunca permitir cambiar id
     const { id: _ignored, ...rest } = updates;
     const updated = { ...products[idx], ...rest, id: products[idx].id };
 
-    // Asegurar tipos básicos
     if (updated.price !== undefined) updated.price = Number(updated.price);
     if (updated.stock !== undefined) updated.stock = Number(updated.stock);
     updated.status = Boolean(updated.status);

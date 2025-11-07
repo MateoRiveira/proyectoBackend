@@ -1,10 +1,9 @@
+
 import { Router } from "express";
 import CartManager from "./cartManager.js";
 
 const router = Router();
-
-
-const manager = new CartManager("../data/carts.json");
+const manager = new CartManager("./data/carts.json");
 
 
 router.post("/", async (req, res) => {
@@ -39,6 +38,7 @@ router.post("/:cid/product/:pid", async (req, res) => {
 });
 
 export default router;
+
 
 
 

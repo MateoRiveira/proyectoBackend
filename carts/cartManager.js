@@ -1,3 +1,4 @@
+
 import fs from "fs";
 import crypto from "crypto";
 
@@ -21,44 +22,36 @@ export default class CartManager {
 
   async createCart() {
     const carts = await this.#loadFile();
-
-    const newCart = {
-      id: crypto.randomUUID(),
-      products: []
-    };
-
+    const newCart = { id: crypto.randomUUID(), products: [] };
     carts.push(newCart);
     await this.#saveFile(carts);
-
     return newCart;
   }
 
   async getCartById(id) {
     const carts = await this.#loadFile();
-    return carts.find(c => String(c.id) === String(id)) || null;
+    return carts.find((c) => String(c.id) === String(id)) || null;
   }
 
   async addProductToCart(cid, pid) {
     const carts = await this.#loadFile();
-    const cart = carts.find(c => String(c.id) === String(cid));
+    const idx = carts.findIndex((c) => String(c.id) === String(cid));
+    if (idx === -1) return null;
 
-    if (!cart) return null;
+    const cart = carts[idx];
+    const pIndex = cart.products.findIndex((p) => String(p.product) === String(pid));
 
-    const existing = cart.products.find(p => p.product === pid);
-
-    if (existing) {
-      existing.quantity++;
+    if (pIndex !== -1) {
+      cart.products[pIndex].quantity = Number(cart.products[pIndex].quantity) + 1;
     } else {
-      cart.products.push({
-        product: pid,
-        quantity: 1
-      });
+      cart.products.push({ product: String(pid), quantity: 1 });
     }
 
+    carts[idx] = cart;
     await this.#saveFile(carts);
-
     return cart;
   }
 }
+
 
 
