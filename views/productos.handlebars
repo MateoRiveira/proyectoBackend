@@ -1,0 +1,17 @@
+<h2>{{titulo}}</h2>
+
+{{#if hayProductos}}
+<ul>
+    {{#each productos}}
+    <li><strong>
+     {{this.nombre}}   
+
+
+    </strong></li>
+    {{/each}}
+
+</ul>
+{{else}}
+<p>no hay productos</p>
+{{/if}}
+

@@ -1,0 +1,9 @@
+<h1>Lista de productos cargados</h1>
+
+<ul>
+{{#each products}}
+    <li>{{title}} — ${{price}}</li>
+{{else}}
+    <p>No hay productos aún.</p>
+{{/each}}
+</ul>
