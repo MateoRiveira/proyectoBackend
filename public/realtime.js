@@ -5,6 +5,7 @@ socket.on("productsUpdated", (products) => {
     const list = document.getElementById("productsList");
     list.innerHTML = "";
 
+    // p = producto
     products.forEach((p) => {
         const li = document.createElement("li");
         li.id = p.id;
@@ -13,7 +14,7 @@ socket.on("productsUpdated", (products) => {
     });
 });
 
-
+//e = evento
 document.getElementById("addForm").addEventListener("submit", (e) => {
     e.preventDefault();
     const product = {
